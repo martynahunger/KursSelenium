@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 
 public class KatalonTest {
 
@@ -55,6 +56,12 @@ public class KatalonTest {
         // wybierz male
         WebElement maleRadioButton = driver.findElement(By.xpath("//*[@id=\"infoForm\"]/div[3]/div/div/label[1]/input"));
         maleRadioButton.click();
+
+        // select
+        Select roleDropdown = new Select(driver.findElement(By.id("role")));
+        roleDropdown.selectByVisibleText("QA");
+
+        driver.findElement(By.id("submit")).click();
     }
 
     @After
