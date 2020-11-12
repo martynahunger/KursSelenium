@@ -25,7 +25,9 @@ public class BingSearchTest {
 
     @Test
     public void testBingSearch() {
-        WebElement element = driver.findElement(By.name("q"));
+        //WebElement element = driver.findElement(By.name("q"));
+        //WebElement element = driver.findElement(By.id("sb_form_q"));
+        WebElement element = driver.findElement(By.className("sb_form_q"));
         element.clear();
         element.sendKeys("Mistrzostwa Swiata w pilce noznej 2018");
         element.submit();
