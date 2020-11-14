@@ -39,7 +39,7 @@ public class GoogleSearch {
     }
 
     @Then("the first one should contain (.*)")
-    public void theFirstOneShouldContainSelenium(String expectedText) {
+    public void theFirstOneShouldContainSelenium(String expectedText, String a) {
         System.out.println(expectedText);
     }
 
