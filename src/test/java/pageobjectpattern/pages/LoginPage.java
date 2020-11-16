@@ -1,14 +1,23 @@
 package pageobjectpattern.pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage {
+class PageBase {
 
-    private WebDriver driver;
+    protected WebDriver driver;
+
+    public PageBase(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
+}
+
+public class LoginPage extends PageBase {
+
+    //private WebDriver driver;
 
     @FindBy(name = "email")
     private WebElement loginInput;
@@ -20,8 +29,9 @@ public class LoginPage {
     private WebElement signInButton;
 
     public LoginPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
+        //this.driver = driver;
+        //PageFactory.initElements(driver, this);
     }
 
     public void loginAs(String email, String password) {
