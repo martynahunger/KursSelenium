@@ -28,10 +28,12 @@ public class KatalonTest {
     }
 
     @Test
-    public void fillFormTest() {
+    public void fillFormNotAllDataTest() {
         // przygotowanie danych
         String firstNameText = "Jan";
         String lastNameText = "Kowalski";
+
+        String validationText = "This field is required.";
 
         // znajdz i wypelnij First name
         WebElement firstNameInput = driver.findElement(By.id("first-name"));
@@ -62,10 +64,27 @@ public class KatalonTest {
         roleDropdown.selectByVisibleText("QA");
 
         driver.findElement(By.id("submit")).click();
+
+        // assert - sprawdzenie, czy wyswietlily sie walidacje
+        Assert.assertTrue(isValidationDisplayed("dob-error", validationText));
+        Assert.assertTrue(isValidationDisplayed("address-error", validationText));
+        Assert.assertTrue(isValidationDisplayed("email-error", validationText));
+        Assert.assertTrue(isValidationDisplayed("password-error", validationText));
+        Assert.assertTrue(isValidationDisplayed("company-error", validationText));
     }
 
     @After
     public void tearDown() {
         driver.quit();
+    }
+
+    private boolean isValidationDisplayed(String elementId, String validationText) {
+        WebElement elementValidation = driver.findElement(By.id(elementId));
+        if (!elementValidation.getText().contains(validationText))
+            return false;
+        if (!elementValidation.isDisplayed())
+            return false;
+
+        return true;
     }
 }
